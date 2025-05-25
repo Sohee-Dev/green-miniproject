@@ -16,9 +16,9 @@
 	<c:choose>
 	<c:when test="${not empty sessionScope.aid}"> <%--로그인 했을 때 메뉴 --%>
 	 	<li><a href="/admin/logout">로그아웃</a></li>
-	 	<li><a href="">공지사항 등록</a></li>
-	 	<li><a href="">FAQ 등록</a></li>
-	 	<li><a href="">1:1문의 현황 확인</a></li>
+	 	<li><a href="/admin/noticeList">공지사항 현황 확인</a></li>
+	 	<li><a href="/admin/faqForm">FAQ현황 확인</a></li>
+	 	<li><a href="/admin/qnaList">Q&A현황 확인</a></li>
 	 	<li><a href="/admin/ticketform">이용권 등록</a></li>
 	 	<li><a href="/admin/report">보고서</a></li>
 	 	<li><p>[${sessionScope.aname}] 관리자님 환영합니다 🤗🤗</p></li>

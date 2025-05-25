@@ -19,8 +19,8 @@
 	 	<li><a href="/logout">로그아웃</a></li>
 	 	<li><a href="">아쿠아리움 안내(이용안내)</a></li>
 	 	<li><a href="/ticket/ticketlist">예약하기</a></li>
-	 	<li><a href="">고객센터</a></li>
-	 	<li><a href="">공지사항</a></li>
+	 	<li><a href="/board/service_center">고객센터</a></li>
+	 	<li><a href="/board/noticeList">공지사항</a></li>
 	 	<li><p>[${sessionScope.name}] 회원님 환영합니다 🤗🤗</p></li>
 	</c:when>
 	<c:otherwise>	<%--비회원 메뉴 --%>
@@ -28,8 +28,8 @@
 		<li><a href="/loginForm">로그인</a></li>
 		<li><a href="">아쿠아리움 안내(이용안내)</a></li>
 		<li><a href="/ticket/ticketlist">예약하기</a></li>
-		<li><a href="">고객센터</a></li>
-		<li><a href="">공지사항</a></li>
+		<li><a href="/board/service_center">고객센터</a></li>
+		<li><a href="/board/noticeList">공지사항</a></li>
 	</c:otherwise>
 </c:choose>
 </ul>

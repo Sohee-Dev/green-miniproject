@@ -21,5 +21,34 @@
 	</script>
 </c:if>
 
+<c:if test="${not empty sessionScope.aid}">
+	<c:choose>
+		<c:when test="${not empty qlist}">
+			<h3>답변을 기다리고 있어요😎😎</h3>
+			<table border=1>
+				<tbody>
+					<tr>
+						<th>목차</th>
+						<th colspan="2">제목</th>
+					</tr>
+					<c:forEach var="qlist" items="${qlist}" varStatus="status">
+						<tr>
+							<td>${status.count}</td>
+							<td>${qlist.qtitle}</td>
+							<td>
+								<a href="/admin/answerForm?qno=${qna.qno}"><input type="button" value="답글달기"></a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:when>
+		<c:otherwise>
+			<h4> ※ 답변가능한 Q&A가 없습니다 😁 ※ </h4>
+		</c:otherwise>
+	</c:choose>
+</c:if>
+
+
 </body>
 </html>

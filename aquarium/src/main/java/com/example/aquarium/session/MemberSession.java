@@ -29,4 +29,8 @@ public class MemberSession {
 		}
 		else return true;
 	}
+	
+	public String getId() {
+		return (String) session.getAttribute("id");
+	}
 }

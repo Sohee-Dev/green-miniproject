@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.aquarium.dto.AdminDTO;
+import com.example.aquarium.dto.QnaDTO;
 import com.example.aquarium.dto.TicketDTO;
 import com.example.aquarium.service.AdminService;
+import com.example.aquarium.service.BoardService;
 import com.example.aquarium.service.TicketService;
 import com.example.aquarium.session.AdminSession;
 
@@ -30,10 +32,15 @@ public class AdminController {
 	AdminSession adminsession;
 	
 	@Autowired
+	BoardService boardService;
+	
+	@Autowired
     private TicketService ticketService; 
 	
 	@GetMapping("/admin")
-	public String root() {
+	public String root(Model model) {
+		List<QnaDTO> list = boardService.workList();
+		model.addAttribute("qlist", list);
 		return "admin/a_index";
 	}
 	
