@@ -26,5 +26,9 @@
 	<select id="getName">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
+	
+	<update id="modify">
+		update member set pw=#{pw} where id=#{id}
+	</update>
 
 </mapper>

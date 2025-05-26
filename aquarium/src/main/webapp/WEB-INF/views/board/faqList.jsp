@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>FAQ List</title>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
@@ -25,5 +25,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<jsp:include page="../footer.jsp" />
 </body>
 </html>

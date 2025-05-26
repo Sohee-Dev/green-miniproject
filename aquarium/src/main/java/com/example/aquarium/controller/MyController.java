@@ -25,4 +25,9 @@ public class MyController {
 	public String seaFriends() {
 		return "userGuide/seaFriendsPg";
 	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "mypage";
+	}
 }

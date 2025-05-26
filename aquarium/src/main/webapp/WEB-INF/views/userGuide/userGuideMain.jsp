@@ -213,5 +213,6 @@ document.getElementById('tab4').addEventListener('click', function () {
   }
 });
 </script>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

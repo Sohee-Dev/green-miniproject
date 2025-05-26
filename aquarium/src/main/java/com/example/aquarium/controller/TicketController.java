@@ -23,6 +23,8 @@ public class TicketController {
 
     @Autowired
     private TicketService ticketService;
+    @Autowired
+	private MemberSession membersession;
     
     //이용권 목록 보여주기+주문까지 
     @GetMapping("/ticketlist")
@@ -35,7 +37,11 @@ public class TicketController {
     
     //주문 폼으로 이동
     @GetMapping("/orderform")
-    public String orderForm(Model model) {
+    public String orderForm(Model model,RedirectAttributes rttr) {
+    	if(membersession.getId()==null) {
+    		rttr.addFlashAttribute("msg","hi");
+    		return "redirect:/loginForm";
+    	}
         List<TicketDTO> list = ticketService.getAllTickets();
         model.addAttribute("ticketList", list);
         return "/order/orderform";
@@ -43,7 +49,6 @@ public class TicketController {
     
     @GetMapping("/checkSession")
     public String orderForm(RedirectAttributes rttr, HttpSession session) {
-    	System.out.println(session.getAttribute("id"));
     	if(session.getAttribute("id") != null) {
     		return "forward:/order/orderform"; 
     	}

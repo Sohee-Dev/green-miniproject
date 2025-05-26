@@ -58,10 +58,22 @@ public class OrderService {
         }
     }
 
-    // 회원별 주문내역 조회
-    public List<Map<String, Object>> selectOrderItemsByMemberId(String id) {
-        return orderDao.selectOrderItemsByMemberId(id);
-    }
-    
-    
+    //회원별 주문내역 제일 최근에 한 3개만 조회
+	public List<Map<String, Object>> selectRecentOrderItemsByMemberId(String id) {
+		return orderDao.selectRecentOrderItemsByMemberId(id);
+	}
+	// 페이징 한 주문 내역 조회
+	public List<Map<String, Object>> selectOrderItemsByMemberIdPaged(String id,int page,int itemsPerPage) {
+		int startRow = (page - 1) * itemsPerPage + 1;
+		int endRow = page * itemsPerPage;
+		return orderDao.selectOrderItemsByMemberIdPaged(id, startRow, endRow);
+	}
+	//주문한 총 내역 수
+	public int countOrdersByMemberId(String id) {
+	    return orderDao.countOrdersByMemberId(id);
+	}
+	//회원의 주문번호에 따른 상세 정보 조회
+	public List<Map<String, Object>> moreOrder(String loginId, String ono) {
+		return orderDao.moreOrder(loginId,ono);
+	}
 }

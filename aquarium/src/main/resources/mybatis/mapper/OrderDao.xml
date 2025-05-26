@@ -31,14 +31,63 @@
         VALUES ('I' || LPAD(seq_items.NEXTVAL, 3, '0'), #{ono}, #{tno}, #{amount})
     </insert>
 
-    <!-- 회원별 주문내역 조회 -->
-    <select id="selectOrderItemsByMemberId" parameterType="string" resultType="map">
-        SELECT o.ono AS ono, o.odate AS odate, o.totalprice AS totalprice, t.tname AS tname, i.amount AS amount
+    <!-- 가장 최근에 주문한 내역 조회 -->
+    <select id="selectRecentOrderItemsByMemberId" parameterType="string" resultType="map">
+    SELECT *
+    FROM (
+        SELECT o.ono,
+               TO_CHAR(o.odate, 'YYYY-MM-DD HH24:MI') AS odate,
+               o.totalprice,
+               LISTAGG(t.tname || ' x' || i.amount, ', ') 
+                   WITHIN GROUP (ORDER BY t.tname) AS ticket_info
         FROM orders o
         JOIN items i ON o.ono = i.ono
         JOIN ticket t ON i.tno = t.tno
         WHERE o.id = #{id}
+        GROUP BY o.ono, o.odate, o.totalprice
         ORDER BY o.odate DESC
-    </select>
+    )
+    WHERE ROWNUM &lt;= 3
+</select>
 
+	
+	<!-- 페이징 네이션 실제 코드+회원이 주문한 내역 조회-->
+	<select id="selectOrderItemsByMemberIdPaged" resultType="map">
+			SELECT * FROM (
+		    SELECT ROWNUM rn, b.* FROM (
+		        SELECT o.ono, 
+		               TO_CHAR(o.odate, 'YYYY-MM-DD HH24:MI') AS odate, 
+		               o.totalprice,
+		               LISTAGG(t.tname || ' x' || i.amount, ', ') 
+		                   WITHIN GROUP (ORDER BY t.tname) AS ticket_info
+		        FROM orders o
+		        JOIN items i ON o.ono = i.ono
+		        JOIN ticket t ON i.tno = t.tno
+		        WHERE o.id = #{id}
+		        GROUP BY o.ono, o.odate, o.totalprice
+		        ORDER BY o.odate DESC
+		    ) b
+		    WHERE ROWNUM &lt;= #{endRow}
+		)
+		WHERE rn &gt;= #{startRow}
+	</select>
+	
+	<!-- 총 주문 내역 수-->
+	<select id="countOrdersByMemberId" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM orders 
+	    WHERE id = #{id}
+	</select>
+	
+	 <select id="moreOrder" parameterType="string" resultType="map">
+	        SELECT *
+	        FROM (
+		        SELECT o.ono AS ono, TO_CHAR(o.odate, 'YYYY-MM-DD HH24:MI') AS odate, o.totalprice AS totalprice, t.tname AS tname, i.amount AS amount
+		        FROM orders o
+		        JOIN items i ON o.ono = i.ono
+		        JOIN ticket t ON i.tno = t.tno
+		        WHERE o.id = #{id} AND o.ono = #{ono}
+		        ORDER BY o.odate DESC
+	        )
+		</select>
 </mapper>

@@ -66,4 +66,33 @@ public class MemberService {
 			return false;
 		}
 	}
+	
+	public String selectPw(String id) {
+		
+		// 비밀번호 db 조회
+		String encryptedPw = memberDao.loginSecretPw(id);
+		
+		// 조회된 비밀번호 => 짝수 인덱스만 호출
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < encryptedPw.length(); i += 2) {
+	        char c = encryptedPw.charAt(i);
+	        
+	        if(excludeChars.indexOf(c) == -1) {
+	        	sb.append(c);
+	        }
+	    }
+	    System.out.println(sb.toString());
+	    return sb.toString();
+	    
+	}
+
+	public boolean modifyPw(String id, String pw) {
+		int result = memberDao.modify(id, pw);
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

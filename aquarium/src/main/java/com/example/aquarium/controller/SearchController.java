@@ -26,41 +26,28 @@ public class SearchController {
 	@Autowired
 	private BoardService boardService;
 
-	@GetMapping("/search")
-	public String search(
-	        @Valid @ModelAttribute("log") SearchLogDTO log,
-	        BindingResult result,
-	        RedirectAttributes rttr,
+	@GetMapping("/board/service_center/search")
+	public String searchFaq(
+	        @RequestParam("keyword") String keyword,
 	        Model model) {
 
-	    if (result.hasErrors()) {
-	    	rttr.addFlashAttribute("error", "검색어를 입력해주세요.");
-	        return "redirect:/";  // 또는 "redirect:/검색폼페이지"
+	    if (keyword == null || keyword.trim().isEmpty()) {
+	        model.addAttribute("error", "검색어를 입력해주세요.");
+	        return "redirect:/board/service_center/1"; // 기본 페이지로 리디렉션
 	    }
 
-	    List<JoinDTO> joinlist = boardService.getJoinList(log.getKeyword());
+	    List<JoinDTO> joinlist = boardService.getJoinList(keyword);
 	    model.addAttribute("joinlist", joinlist);
+	    model.addAttribute("keyword", keyword);
 
+	    // 필요하면 검색 로그 저장
+	    SearchLogDTO log = new SearchLogDTO();
+	    log.setKeyword(keyword);
 	    log.setToday(new Date());
 	    boardService.insertKeyword(log);
 
-	    return "result";
+	    return "/result"; // 검색 결과 전용 JSP
 	}
-
-
-	// 인기 검색어 목록 지금은 index에 넣어놔서
-	// getMapping 나중에 변경 및 return 반환값 변경 필수
-//	@GetMapping("/")
-//	public String root(Model model, HttpSession session) {
-//
-//
-//		// 인기 검색어 로그 목록 보기
-//		List<SearchLogDTO> loglist = boardService.getLogList();
-//
-//		model.addAttribute("loglist", loglist);
-//
-//		return "index";
-//	}
 
 	@GetMapping("/quiz")
 	public String quiz() {

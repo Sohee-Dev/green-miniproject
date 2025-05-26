@@ -8,7 +8,8 @@
 </head>
 <body>
 <jsp:include page="../header.jsp" />
-<form action="/board/qnaInsert" method="post">
+<h2>1:1문의 등록</h2>
+	<form action="/board/qnaInsert" method="post">
     <table border="1">
         <tr>
             <td>제목</td>
@@ -34,6 +35,8 @@
             </td>
         </tr>
     </table>
+    <a href="/board/qnaList/1">목록으로 되돌아가기</a>
 </form>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

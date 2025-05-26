@@ -77,6 +77,21 @@ public class MemberController {
 		return memberService.btnIdCheck(id);
 	}
 	
+	@GetMapping("/modifyPw")
+	public String modifyPw(HttpSession session, RedirectAttributes rttr, Model model) {
+		String id = memberSession.getId();
+		String pw = memberService.selectPw(id);
+		
+		if(!memberSession.isLoggedIn()) {
+			rttr.addFlashAttribute("loginMsg", "로그인 후 이용 가능한 페이지입니다.");
+			return "redirect:/loginForm";
+		} else {
+			model.addAttribute("id", id);
+			model.addAttribute("pw", pw);
+			return "modifyPw";
+		}
+	}
+	
 	@PostMapping("/join")
 	public String join(MemberDto member) {
 		if (memberService.joinCheck(member)) {

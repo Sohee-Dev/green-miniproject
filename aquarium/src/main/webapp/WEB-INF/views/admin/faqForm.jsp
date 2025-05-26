@@ -28,5 +28,6 @@
 			</tr>
 		</table>
 	</form>
+	<a href="/admin/faqList">목록으로 되돌아가기</a>
 </body>
 </html>

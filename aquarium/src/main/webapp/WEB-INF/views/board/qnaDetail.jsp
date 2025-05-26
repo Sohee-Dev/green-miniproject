@@ -2,11 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-<title>QnA 상세</title>
+<title>1:1문의 상세</title>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
-	<h2>QnA 상세 보기</h2>
+	<h2>1:1문의 상세 보기</h2>
 
 	<table border="1">
 		<tr>
@@ -39,6 +39,7 @@
 		</tr>
 	</table>
 
-	<a href="/board/service_center">← 목록으로 돌아가기</a>
+	<a href="/board/qnaList/1">← 목록으로 돌아가기</a>
+	<jsp:include page="../footer.jsp" />
 </body>
 </html>

@@ -9,5 +9,6 @@
 <body>
 <jsp:include page="../header.jsp" />
 <h1>해양 친구들 in 오션랜드 부산</h1>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

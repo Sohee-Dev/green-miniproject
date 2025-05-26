@@ -9,7 +9,7 @@
 <title>공지사항</title>
 </head>
 <body>
-	<jsp:include page="a_header.jsp"/>
+	<jsp:include page="a_header.jsp" />
 	<h1>Notice 공지사항 페이지</h1>
 
 	<table border="1">
@@ -20,9 +20,9 @@
 			<th>작성일</th>
 			<th>삭제기능</th>
 		</tr>
-		<c:forEach var="notice" items="${noticeList}">
+		<c:forEach var="notice" items="${noticeList}" varStatus="status">
 			<tr>
-				<td>${notice.nid}</td>
+				<td>${(currentPage - 1) * 5 + status.index + 1}</td>
 				<td>${notice.ntitle}</td>
 				<td>${notice.ncontent}</td>
 				<td><fmt:formatDate value="${notice.ndate}"
@@ -37,7 +37,39 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
 	<a href="/admin/noticeForm">공지사항 등록</a>
 
+	<c:if test="${not empty noticeinsertMsg}">
+		<script>
+			alert("${noticeinsertMsg}");
+		</script>
+	</c:if>
+	
+	<!-- ✅ 페이지네이션 영역 -->
+<div style="margin-top: 20px; text-align: center;">
+	<c:if test="${totalPages > 1}">
+		<c:if test="${currentPage > 1}">
+			<a class="page-btn" href="/admin/noticeList/1">처음</a>
+			<a class="page-btn" href="/admin/noticeList/${currentPage - 1}">이전</a>
+		</c:if>
+
+		<c:forEach var="i" begin="1" end="${totalPages}">
+			<c:choose>
+				<c:when test="${i == currentPage}">
+					<span class="page-btn page-current">${i}</span>
+				</c:when>
+				<c:otherwise>
+					<a class="page-btn" href="/admin/noticeList/${i}">${i}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+
+		<c:if test="${currentPage < totalPages}">
+			<a class="page-btn" href="/admin/noticeList/${currentPage + 1}">다음</a>
+			<a class="page-btn" href="/admin/noticeList/${totalPages}">끝</a>
+		</c:if>
+	</c:if>
+</div>
 </body>
 </html>

@@ -34,6 +34,6 @@
 </table>
 
 <a href="checkSession">주문하러 가기</a>
-
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,11 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<c:if test="${not empty msg}">
+   <script>
+      alert("${msg}");
+   </script>
+</c:if> 
 <h1>LoginForm Page</h1>
 <hr>
 <form action="/login" method="POST">
@@ -28,6 +34,6 @@
 	+ 로그인 5번 실패 시 1분 간 잠금
 	+ 자동 로그인
 	+ 아이디/비밀번호 찾기 구체화 (인증번호 발송 등)
-
+<jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -114,6 +114,6 @@
     	<h1>오션랜드 부산에서 볼 수 있는 해양 친구들</h1> 
     	<a href="/userGuide/seaFriends"><button>자세히 보기 ></button></a> 
     </div>
-    
+    <jsp:include page="../footer.jsp" />
 </body>
 </html>

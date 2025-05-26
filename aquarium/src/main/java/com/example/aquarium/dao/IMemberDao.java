@@ -17,4 +17,6 @@ public interface IMemberDao {
 	public int join(@Param("member")MemberDto member);
 	
 	public MemberDto getName(String id);
+	
+	public int modify(@Param("id")String id, @Param("pw")String pw);
 }
