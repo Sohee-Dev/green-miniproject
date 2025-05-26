@@ -10,4 +10,19 @@ public class MyController {
 	public String root() {
 		return "index";
 	}
+	
+	@GetMapping("/userGuide/main")
+	public String userGuideMain() {
+		return "userGuide/userGuideMain";
+	}
+	
+	@GetMapping("userGuide/playing")
+	public String userPlaying() {
+		return "userGuide/playingPg";
+	}
+	
+	@GetMapping("userGuide/seaFriends")
+	public String seaFriends() {
+		return "userGuide/seaFriendsPg";
+	}
 }

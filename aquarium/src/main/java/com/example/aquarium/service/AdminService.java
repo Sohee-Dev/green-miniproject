@@ -47,7 +47,6 @@ public class AdminService {
 			int sales = ((BigDecimal) map.get("TOTAL_SALES")).intValue();
 			changeResult.put(date, sales);
 		}
-		System.out.println("changeResult: " + changeResult);
 		
 		return changeResult;
 	}

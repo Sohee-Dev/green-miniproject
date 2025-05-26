@@ -88,9 +88,7 @@ public class AdminController {
 	@PostMapping("/admin/drawMonthChart")
 	@ResponseBody
 	public Map<String, Integer> drawMonthChart(@RequestBody Map<String, String> monthMap){
-		System.out.println(monthMap);
 		String year = (String)monthMap.get("year");
-		System.out.println(year);
 		Map<String, Integer> result = service.getSalesOfmonth(year);
 		return result;
 	}
@@ -107,7 +105,7 @@ public class AdminController {
     @PostMapping("/admin/ticketcreate")
     public String ticketcreate(TicketDTO ticket, RedirectAttributes rttr) {
     	int result = ticketService.createTicket(ticket);
-    	System.out.println(result);
+
     	if(result >= 1) {
     		rttr.addFlashAttribute("result", "ok");
     	}

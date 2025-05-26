@@ -38,7 +38,7 @@ public class MemberService {
 	        	sb.append(c);
 	        }
 	    }
-	    System.out.println("기존 : " + sb.toString() + ", 입력 : " + pw);
+
 	    return pw.equals(sb.toString());
 	    
 	}
@@ -50,7 +50,7 @@ public class MemberService {
 	// 회원가입
 	public int btnIdCheck(String id) { // 아이디 중복 확인
 		int result = memberDao.joinIdCheck(id); 
-		System.out.println("id : " + id + ", result : " + result);
+		
 		if (result == 1) {
 			return 0; // 중복
 		} else {
